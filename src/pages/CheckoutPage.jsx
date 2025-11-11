@@ -23,7 +23,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Mock cart (يمكن فيما بعد تستبدليه بالـ API)
+  // Mock cart 
   const items = [
     { id: 1, title: "Chicken breasts", qty: 1, price: 7.99, image: "/mock1.jpg" },
     { id: 2, title: "Soda 2L", qty: 1, price: 3.5, image: "/mock2.jpg" },
