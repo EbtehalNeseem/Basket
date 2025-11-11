@@ -1,6 +1,6 @@
 // src/components/LoginOverlay.jsx
 import React from "react";
-import { Button } from "@/components/ui/button"; // shadcn button path (تأكدي من المسار عندك)
+import { Button } from "@/components/ui/button";  
 
 export default function LoginOverlay({ visible, onLogin }) {
   if (!visible) return null;
