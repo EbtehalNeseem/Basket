@@ -1,6 +1,6 @@
 // src/components/ShippingMethod.jsx
 import React from "react";
-import { RadioGroup } from "@/components/ui/radio-group"; // أو استخدمي عناصر radio عادية إذا مش متوفرة
+import { RadioGroup } from "@/components/ui/radio-group"; 
 import { Label } from "@/components/ui/label";
 
 export default function ShippingMethod({ shippingMethod, setShippingMethod, disabled }) {
