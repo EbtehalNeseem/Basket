@@ -17,7 +17,7 @@ import Wishlist from "./Pages/Wishlist";
 import Login from "./Pages/Login";
 import SearchResults from "./Pages/SearchResults";
 import "./App.css";
-import Logout from "./pages/Logout";
+import Register from "./pages/Register";
 
 export default function App() {
   return (
@@ -32,7 +32,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/myaccount" element={<MyAccount />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/meats" element={<Meats />} />
           <Route path="/bakery" element={<Bakery />} />
