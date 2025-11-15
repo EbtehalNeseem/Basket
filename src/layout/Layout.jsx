@@ -4,7 +4,7 @@ import ScrollToTop from "./ScrollToTop";
 
 <>
 <ScrollToTop />
-<Header />
+<Header  />
 <main className="min-h-[60vh]">
     {children}
 </main>

@@ -4,7 +4,6 @@ import Footer from "./layout/Footer";
 import ScrollToTop from "./layout/ScrollToTop";
 import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
-import Cart from "./Pages/Cart";
 import Blog from "./Pages/Blog";
 import Meats from "./Pages/Meats";
 import Bakery from "./Pages/Bakery";
@@ -19,21 +18,24 @@ import SearchResults from "./Pages/SearchResults";
 import "./App.css";
 import Register from "./pages/Register";
 import Checkout from "./pages/Checkout";
+import CartDrawer from "./components/cart/CartDrawer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react"
 
 export default function App() {
   const queryClient = new QueryClient();
+  const [isCartOpen, setIsCartOpen] = useState(false); 
 
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ScrollToTop />
-        <Header />
+        <Header setIsCartOpen={setIsCartOpen} />
+        <CartDrawer isOpen={isCartOpen} setIsOpen={setIsCartOpen} />
         <main className="min-h-[60vh]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
-            <Route path="/cart" element={<Cart />} />
             <Route path="/myaccount" element={<MyAccount />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
