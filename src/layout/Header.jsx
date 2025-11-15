@@ -8,6 +8,7 @@ import search from "../assets/search-interface-symbol.png";
 import ShoppingBagIcon from "../assets/market.png";
 import BEVERAGS from "../assets/BERE.png";
 import MEAST from "../assets/Icon.png";
+import Bakery from "../assets/bakery.png";
 import { useState } from "react";
 import SearchBox from "../Components/Search/SearchBox";
 const Container = ({ children }) => (
@@ -20,7 +21,7 @@ const NAV_LINKS = [
   { to: "/", label: "HOME" },
   { to: "/shop", label: "SHOP" },
   { to: "/meats", label: "MEATS & SEAFOOD", icon: MEAST },
-  { to: "/bakery", label: "BAKERY" },
+  { to: "/bakery", label: "BAKERY" , icon: Bakery},
   { to: "/beverages", label: "BEVERAGES", icon: BEVERAGS },
   { to: "/blog", label: "BLOG" },
   { to: "/contact", label: "CONTACT" },
@@ -51,7 +52,7 @@ export default function Header() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/checkout" className="hover:underline">
                   Compare
                 </a>
               </li>

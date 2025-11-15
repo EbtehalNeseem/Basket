@@ -18,13 +18,13 @@ import Login from "./Pages/Login";
 import SearchResults from "./Pages/SearchResults";
 import "./App.css";
 import Register from "./pages/Register";
+import Checkout from "./pages/Checkout";
 
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Header />
-
       <main className="min-h-[60vh]">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -40,11 +40,11 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-
       <Footer />
     </BrowserRouter>
   );
