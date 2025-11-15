@@ -10,8 +10,9 @@ import ShoppingBagIcon from "../assets/cart.png";
 import BEVERAGS from "../assets/BERE.png";
 import MEAST from "../assets/Icon.png";
 import Bakery from "../assets/bakery.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBox from "../Components/Search/SearchBox";
+
 
 const Container = ({ children }) => (
   <div className="mx-auto w-full max-w-[1200px] px-3 sm:px-4">{children}</div>
@@ -31,6 +32,19 @@ const NAV_LINKS = [
 
 export default function Header({ setIsCartOpen }) {
   const [open, setOpen] = useState(false);
+  
+  const [isloggedin, setIsLoggedIn] = useState(false);  
+
+
+  useEffect(()=>{
+    const token = localStorage.getItem("token")
+    setIsLoggedIn(!!token)
+  },[])
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
 
   return (
 
@@ -111,18 +125,26 @@ export default function Header({ setIsCartOpen }) {
 
           {/* User + Cart */}
           <div className="ml-auto flex items-center gap-3 md:gap-5">
-            <Link
+                        {
+              !isloggedin && (
+                <Link
               to="/login"
               className="hidden sm:flex items-center justify-center bg-white border rounded-full py-1.5 px-3 text-xs md:text-sm hover:bg-gray-50"
             >
               Login
             </Link>
-            <Link
-              to="/logout"
-              className="hidden sm:flex items-center justify-center bg-white border rounded-full py-1.5 px-3 text-xs md:text-sm hover:bg-gray-50"
-            >
-              Logout
-            </Link>
+              )
+            }
+            {
+              isloggedin && (
+                <button
+                onClick={handleLogout}
+                className="text-white bg-red-600 border rounded-full py-1.5 px-3 text-xs md:text-sm hover:bg-red-700"
+                >
+                  Logout
+                </button>
+              )
+            }
 
             <Link
               to="/myaccount"
