@@ -23,16 +23,17 @@ const NAV_LINKS = [
   { to: "/", label: "HOME" },
   { to: "/shop", label: "SHOP" },
   { to: "/meats", label: "MEATS & SEAFOOD", icon: MEAST },
-  { to: "/bakery", label: "BAKERY" , icon: Bakery},
+  { to: "/bakery", label: "BAKERY", icon: Bakery },
   { to: "/beverages", label: "BEVERAGES", icon: BEVERAGS },
   { to: "/blog", label: "BLOG" },
   { to: "/contact", label: "CONTACT" },
 ];
 
-export default function Header() {
+export default function Header({ setIsCartOpen }) {
   const [open, setOpen] = useState(false);
 
   return (
+
     <header className="bg-white sticky top-0 z-50 shadow-sm">
       {/* 1) NOTICE BAR */}
       <div style={{ backgroundColor: GREEN }}>
@@ -55,7 +56,7 @@ export default function Header() {
                 </a>
               </li>
               <li>
-                <a href="/checkout" className="hover:underline">
+                <a href="#" className="hover:underline">
                   Compare
                 </a>
               </li>
@@ -131,18 +132,20 @@ export default function Header() {
               <img src={user1} alt="user" className="w-4 m-2" />
             </Link>
 
-            <Link to="/cart" className="flex items-center gap-2">
+            
               <span className="hidden sm:inline text-sm text-gray-700">
                 $0.00
               </span>
+              <button
+              onClick={() => setIsCartOpen(true)}
+              className="flex items-center gap-2"
+            >
               <span className="relative">
-
-                  <img
+                <img
                   src={ShoppingBagIcon}
                   alt=""
                   className="w-7 h-7 bg-red-100 p-2 rounded-full flex items-center justify-center"
-                  />
-
+                />
                 <span
                   className="absolute -top-2 -right-2 text-[10px] text-white w-4 h-4 rounded-full grid place-items-center"
                   style={{ backgroundColor: GREEN }}
@@ -150,7 +153,7 @@ export default function Header() {
                   0
                 </span>
               </span>
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -187,9 +190,8 @@ export default function Header() {
 
         {/* MOBILE DROPDOWN NAV */}
         <div
-          className={`md:hidden overflow-hidden transition-[max-height] duration-300 border-t ${
-            open ? "max-h-96" : "max-h-0"
-          }`}
+          className={`md:hidden overflow-hidden transition-[max-height] duration-300 border-t ${open ? "max-h-96" : "max-h-0"
+            }`}
         >
           <div className="px-3 py-3 space-y-3 bg-white">
             {/* Search للموبايل */}
@@ -233,6 +235,8 @@ export default function Header() {
           </div>
         </div>
       </Container>
+      
     </header>
+    
   );
 }
