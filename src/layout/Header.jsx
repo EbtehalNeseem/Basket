@@ -2,15 +2,17 @@
 // src/components/layout/Header.jsx
 import { Link, NavLink } from "react-router-dom";
 import image1 from "../assets/Link - Bacola Store.png";
-import user1 from "../assets/user.png";
+import user1 from "../assets/profile.png";
 import Vector from "../assets/Vector.png";
 import MenuNav from "../assets/menu-burger (1).png";
 import search from "../assets/search-interface-symbol.png";
-import ShoppingBagIcon from "../assets/market.png";
+import ShoppingBagIcon from "../assets/cart.png";
 import BEVERAGS from "../assets/BERE.png";
 import MEAST from "../assets/Icon.png";
+import Bakery from "../assets/bakery.png";
 import { useEffect, useState } from "react";
 import SearchBox from "../Components/Search/SearchBox";
+
 
 const Container = ({ children }) => (
   <div className="mx-auto w-full max-w-[1200px] px-3 sm:px-4">{children}</div>
@@ -22,7 +24,7 @@ const NAV_LINKS = [
   { to: "/", label: "HOME" },
   { to: "/shop", label: "SHOP" },
   { to: "/meats", label: "MEATS & SEAFOOD", icon: MEAST },
-  { to: "/bakery", label: "BAKERY" },
+  { to: "/bakery", label: "BAKERY" , icon: Bakery},
   { to: "/beverages", label: "BEVERAGES", icon: BEVERAGS },
   { to: "/blog", label: "BLOG" },
   { to: "/contact", label: "CONTACT" },
@@ -67,7 +69,7 @@ export default function Header() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/checkout" className="hover:underline">
                   Compare
                 </a>
               </li>
@@ -84,14 +86,14 @@ export default function Header() {
             </div>
 
             <div className="col-span-1 flex items-center justify-end gap-3">
-              <span className="hidden lg:inline">
-                Need help? Call us: <b>+0200 500</b>
+              <span className="hidden lg:inline border-l pl-5 py-1">
+                Need help? Call us: <b className="text-primary">+0200 500</b>
               </span>
-              <select className="border rounded px-2 py-1 text-xs">
+              <select className="border-l px-2 py-2 text-xs">
                 <option>English</option>
                 <option>Arabic</option>
               </select>
-              <select className="border rounded px-2 py-1 text-xs">
+              <select className="px-2 py-1 text-xs">
                 <option>USD</option>
                 <option>EGP</option>
               </select>
@@ -118,7 +120,7 @@ export default function Header() {
           </Link>
 
           {/* Search desktop / tablet */}
-          <SearchBox className="hidden md:block flex-1 max-w-[690px] ml-3" />
+          <SearchBox className="hidden md:block flex-1 max-w-[690px] ml-3 bg-[#F3F4F7]" />
 
           {/* User + Cart */}
           <div className="ml-auto flex items-center gap-3 md:gap-5">
@@ -146,9 +148,9 @@ export default function Header() {
             <Link
               to="/myaccount"
               title="My Account"
-              className="flex items-center justify-center bg-white"
+              className="flex items-center justify-center bg-white border rounded-full"
             >
-              <img src={user1} alt="user" className="w-6" />
+              <img src={user1} alt="user" className="w-4 m-2" />
             </Link>
 
             <Link to="/cart" className="flex items-center gap-2">
@@ -156,11 +158,13 @@ export default function Header() {
                 $0.00
               </span>
               <span className="relative">
-                <img
+
+                  <img
                   src={ShoppingBagIcon}
                   alt=""
-                  className="w-8 h-8 bg-red-100 rounded-full p-1 flex items-center justify-center"
-                />
+                  className="w-7 h-7 bg-red-100 p-2 rounded-full flex items-center justify-center"
+                  />
+
                 <span
                   className="absolute -top-2 -right-2 text-[10px] text-white w-4 h-4 rounded-full grid place-items-center"
                   style={{ backgroundColor: GREEN }}
