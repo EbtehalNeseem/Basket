@@ -21,15 +21,10 @@
   gap: 15px;
 }
 
-<<<<<<< HEAD
+
 .text-primary {
   color: var(--primary);
 }
-=======
-.text-primary{
-    color: var(--primary);
-}
-
 
 
 @layer base {
@@ -98,4 +93,3 @@
     @apply bg-background text-foreground;
   }
 }
->>>>>>> ddd2e8cd9e8efe4dfe59084c18f76a2a5acae7b3
