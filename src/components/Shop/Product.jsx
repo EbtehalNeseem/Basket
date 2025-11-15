@@ -8,18 +8,18 @@ export default function Product({ name, image, available, review, price }) {
         <span className="font-medium text-sm text-[#202435] leading-5">
           {name}
         </span>
-        <span className="text-[#00B853] font-semibold tracking-tighter uppercase text-xs">
+        <span className="text-[--green-custom] font-semibold tracking-tighter uppercase text-xs">
           {available}
         </span>
         <span>{review} reviews</span>
-        <span className="text-[#D51243] font-medium">${price}</span>
+        <span className="text-[--red-custom] font-medium">${price}</span>
       </div>
       <div className="rounded-4xl w-full flex overflow-hidden border-2 border-r-0 border-[#EDEEF5]">
         <button className="bg-[#EDEEF5] text-black font-bold px-4 py-2 border border-[#EDEEF5]">
           -
         </button>
         <span className="flex-1 justify-center items-center flex ">0</span>
-        <button className="bg-[#FFCD00] text-black px-4 py-2 rounded-md ]">
+        <button className="bg-[--gold] text-black px-4 py-2 rounded-md ]">
           +
         </button>
       </div>

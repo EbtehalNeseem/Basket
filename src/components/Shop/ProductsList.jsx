@@ -46,7 +46,7 @@ export default function ProductsList() {
           <button
             key={i}
             className={`px-3 py-1 w-9 h-9  rounded-full font-semibold text-sm cursor-pointer ${
-              currentPage === i + 1 ? "bg-[#35AFA0] text-white" : ""
+              currentPage === i + 1 ? "bg-[--primary] text-white" : ""
             }`}
             onClick={() => setPage(i + 1)}
           >

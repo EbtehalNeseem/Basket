@@ -9,7 +9,7 @@ export default function AvailabilityItem({ name, id }) {
     <div className="flex items-center gap-3 ">
       <Checkbox
         id={id}
-        className="data-[state=checked]:bg-[#00B853] data-[state=checked]:border-[#00B853] cursor-pointer "
+        className="data-[state=checked]:bg-[--green-custom] data-[state=checked]:border-[--green-custom] cursor-pointer "
       />
       <Label htmlFor={id} className="text-[#71778E] font-normal  text-sm">
         {name}
