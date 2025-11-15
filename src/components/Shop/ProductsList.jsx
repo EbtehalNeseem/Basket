@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useFilterStore } from "../stores/filterStore.js";
-import Product from "./Product.jsx";
-import useProducts from "@/features/shop/Hooks/useProducts.js";
+import { useFilterStore } from "@/store/filterStore.js";
+import Product from "@/components/Shop/Product.jsx";
+import useProducts from "@/hooks/useProducts.js";
 
 export default function ProductsList() {
   const { currentPage, productsPerPage, setPage } = useFilterStore();
@@ -16,8 +16,8 @@ export default function ProductsList() {
   if (error) return <p>{error.response.data.message}</p>;
   return (
     <>
-      <div className=" flex flex-wrap justify-start w-full px-30 md:px-11 xl:px-0">
-        {currentProducts.map((product) => {
+      <div className=" flex flex-wrap justify-start w-full px-30 md:px-11 xl:px-0 max-w-[855px]">
+        {currentProducts?.map((product) => {
           return (
             <Product
               key={product._id}

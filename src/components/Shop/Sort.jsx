@@ -1,4 +1,4 @@
-import useProducts from "../Hooks/useProducts";
+import useProducts from "@/hooks/useProducts";
 
 export default function Sort() {
   const { products, isLoading, error } = useProducts();

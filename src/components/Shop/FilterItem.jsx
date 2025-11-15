@@ -1,12 +1,11 @@
-import { Checkbox } from "@/components/ui/checkbox.js";
-import { Label } from "@/components/ui/label.js";
-import { useFilterStore } from "../stores/filterStore.js";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { useFilterStore } from "@/store/filterStore.js";
 
 export default function FilterItem({ name, catId }) {
   const { categoryId, setCategory } = useFilterStore();
   const handleChange = (catId) => {
     setCategory(categoryId === catId ? null : catId); // toggle off
-    console.log(categoryId);
   };
   return (
     <div className="flex items-center gap-3 ">

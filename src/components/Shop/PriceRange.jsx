@@ -1,10 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useFilterStore } from "../stores/filterStore";
+import { useFilterStore } from "@/store/filterStore.js";
 
-export function InputDemo() {
-  return <Input type="email" placeholder="Email" />;
-}
 export default function PriceRange() {
   const { minPrice, maxPrice, setPriceRange } = useFilterStore();
   return (

@@ -1,6 +1,6 @@
-import { Checkbox } from "@/components/ui/checkbox.js";
-import { Label } from "@/components/ui/label.js";
-import useProducts from "../Hooks/useProducts";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import useProducts from "@/hooks/useProducts";
 export default function BrandItem({ name, id }) {
   const { products } = useProducts();
   const count = products?.filter(

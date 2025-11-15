@@ -1,4 +1,4 @@
-import AvailabilityItem from "./AvailabilityItem";
+import AvailabilityItem from "@/components/Shop/AvailabilityItem.jsx";
 export default function Availability() {
   return (
     <div className="flex flex-col gap-5 ">
