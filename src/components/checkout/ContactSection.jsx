@@ -5,7 +5,7 @@ export default function ContactSection() {
     <>
       <div className="flex justify-between">
         <h3 className="font-bold text-[20px]">Contact</h3>
-        <a href="" className="underline text-primary hover:text-black hover:border-0 ">Log in</a>
+        <a href="/login" className="underline text-primary hover:text-black hover:border-0 ">Log in</a>
       </div>
       <form action="">
         <input className="w-full border px-2 py-3 my-2 rounded focus:outline-[#1773B0] " type="text" placeholder="Email or mobile phone number" />

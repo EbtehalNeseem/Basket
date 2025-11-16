@@ -20,6 +20,7 @@ export default function ProductsList() {
         {currentProducts?.map((product) => {
           return (
             <Product
+              id={product._id}
               key={product._id}
               name={product.Name}
               image={product.Image.url}

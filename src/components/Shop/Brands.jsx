@@ -2,7 +2,6 @@ import useBrands from "@/hooks/useBrands.js";
 import BrandItem from "@/components/Shop/BrandItem.jsx";
 export default function Brands() {
   const { data: brands } = useBrands();
-  console.log(brands);
   return (
     <div className="flex flex-col gap-5 min-h-[243.92px]">
       <h6 className="font-semibold">BRANDS</h6>
