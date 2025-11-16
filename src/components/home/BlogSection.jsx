@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../../lib/api";
+import { Link } from "react-router-dom";
 
 const ENDPOINT = "/blog/get-all-blog";
 
@@ -42,9 +43,10 @@ export default function BlogSection() {
             Ut placerat, magna quis porttitor vulputate, magna nunc auctor ante.
           </p>
         </div>
-        <button className="text-[12px] border rounded-full px-3 py-2 hover:bg-gray-100 md:text-[13px] text-gray-500">
+
+            <Link to="/blog" className="text-[12px] border rounded-full px-3 py-2 hover:bg-gray-100 md:text-[13px] text-gray-500">
           View All
-        </button>
+        </Link>
       </div>
 
       {/* Blog Cards */}
@@ -84,9 +86,9 @@ export default function BlogSection() {
                   <p className="mt-3 text-sm text-gray-500 line-clamp-3">
                     {p.content || ""}
                   </p>
-                  <button className="text-[12px] border rounded-full px-3 py-2 hover:bg-gray-100 md:text-[13px] text-gray-500 mt-3">
+                    <Link to={`/blog/${p._id}`} state={{post: p}} className="text-[12px] border rounded-full px-3 py-3 inline-block hover:bg-gray-100 md:text-[13px] text-gray-500 mt-3">
                     Read More
-                  </button>
+                  </Link>
                 </div>
               </article>
             ))}

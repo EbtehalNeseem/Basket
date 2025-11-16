@@ -20,6 +20,7 @@ import "./App.css";
 import Register from "./pages/Register";
 import Checkout from "./pages/Checkout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import BlogDetails from "./components/home/BlogDetails";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogDetails />} />
             <Route path="/meats" element={<Meats />} />
             <Route path="/bakery" element={<Bakery />} />
             <Route path="/beverages" element={<Beverages />} />

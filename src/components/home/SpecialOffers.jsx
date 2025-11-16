@@ -4,7 +4,7 @@ import { api } from "../../lib/api";
 import ProductCard from "../Shop/ProductCard";
 
 const BORDER_RED = "#e26d79";
-const ENDPOINT = "/offer/top-offer";
+const ENDPOINT = "/offer/get-all-offer";
 
 function Countdown() {
   const box =
