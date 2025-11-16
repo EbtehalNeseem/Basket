@@ -1,9 +1,26 @@
-import React from 'react'
+const { useNavigate } = require("react-router-dom");
 
-const Logout = () => {
-  return (
-    <div>Logout</div>
-  )
-}
+const { phone, password, clearCredentials, clearTokens , accessToken } = useUserToken();
+  const navigate = useNavigate();
 
-export default Logout
+  function logout() {
+    api.post(`/auth/logout`,
+      {
+        Phone: phone,
+        Password: password
+      }
+    )
+      .then((res) => {
+        console.log(res);
+        clearTokens();
+        clearCredentials();
+        navigate('/login')
+      }
+
+
+      ).catch((err) => {
+        console.log(err);
+
+      })
+
+  }
