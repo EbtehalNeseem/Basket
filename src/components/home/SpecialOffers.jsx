@@ -37,7 +37,6 @@ export default function SpecialOffers() {
         const { data } = await api.get(ENDPOINT);
         const list = Array.isArray(data) ? data : data.data || [];
         setItems(list.slice(0, 5));
-        console.log(list.data)
       } catch (e) {
         console.error("fetch top offers error:", e);
         setItems([]);

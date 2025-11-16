@@ -6,14 +6,13 @@ import user1 from "../assets/profile.png";
 import Vector from "../assets/Vector.png";
 import MenuNav from "../assets/menu-burger (1).png";
 import search from "../assets/search-interface-symbol.png";
-import ShoppingBagIcon from "../assets/cart.png";
 import BEVERAGS from "../assets/BERE.png";
 import MEAST from "../assets/Icon.png";
 import Bakery from "../assets/bakery.png";
 import { useEffect, useState } from "react";
 import SearchBox from "../Components/Search/SearchBox";
-
-
+import { useCartStore } from "../store/cartstore"
+import CartIcon from "../components/home/CartIcon";
 const Container = ({ children }) => (
   <div className="mx-auto w-full max-w-[1200px] px-3 sm:px-4">{children}</div>
 );
@@ -31,15 +30,16 @@ const NAV_LINKS = [
 ];
 
 export default function Header({ setIsCartOpen }) {
+  const count = useCartStore((state) => state.cartItems.length);
   const [open, setOpen] = useState(false);
-  
-  const [isloggedin, setIsLoggedIn] = useState(false);  
+
+  const [isloggedin, setIsLoggedIn] = useState(false);
 
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem("token")
     setIsLoggedIn(!!token)
-  },[])
+  }, [])
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -125,21 +125,21 @@ export default function Header({ setIsCartOpen }) {
 
           {/* User + Cart */}
           <div className="ml-auto flex items-center gap-3 md:gap-5">
-                        {
+            {
               !isloggedin && (
                 <Link
-              to="/login"
-              className="hidden sm:flex items-center justify-center bg-white border rounded-full py-1.5 px-3 text-xs md:text-sm hover:bg-gray-50"
-            >
-              Login
-            </Link>
+                  to="/login"
+                  className="hidden sm:flex items-center justify-center bg-white border rounded-full py-1.5 px-3 text-xs md:text-sm hover:bg-gray-50"
+                >
+                  Login
+                </Link>
               )
             }
             {
               isloggedin && (
                 <button
-                onClick={handleLogout}
-                className="text-white bg-red-600 border rounded-full py-1.5 px-3 text-xs md:text-sm hover:bg-red-700"
+                  onClick={handleLogout}
+                  className="text-white bg-red-600 border rounded-full py-1.5 px-3 text-xs md:text-sm hover:bg-red-700"
                 >
                   Logout
                 </button>
@@ -154,27 +154,15 @@ export default function Header({ setIsCartOpen }) {
               <img src={user1} alt="user" className="w-4 m-2" />
             </Link>
 
-            
-              <span className="hidden sm:inline text-sm text-gray-700">
-                $0.00
-              </span>
-              <button
+
+            <span className="hidden sm:inline text-sm text-gray-700">
+              $0.00
+            </span>
+            <button
               onClick={() => setIsCartOpen(true)}
               className="flex items-center gap-2"
             >
-              <span className="relative">
-                <img
-                  src={ShoppingBagIcon}
-                  alt=""
-                  className="w-7 h-7 bg-red-100 p-2 rounded-full flex items-center justify-center"
-                />
-                <span
-                  className="absolute -top-2 -right-2 text-[10px] text-white w-4 h-4 rounded-full grid place-items-center"
-                  style={{ backgroundColor: GREEN }}
-                >
-                  0
-                </span>
-              </span>
+              <CartIcon />
             </button>
           </div>
         </div>
@@ -257,8 +245,8 @@ export default function Header({ setIsCartOpen }) {
           </div>
         </div>
       </Container>
-      
+
     </header>
-    
+
   );
 }
