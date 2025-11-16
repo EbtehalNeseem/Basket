@@ -6,7 +6,7 @@ export default function CartIcon() {
 
   return (
     <div className="relative">
-      <div className="">
+      <div className="rounded-full bg-[--pink-custom] p-2">
         <img src={ShoppingBagIcon} />
       </div>
       {count > 0 && (
