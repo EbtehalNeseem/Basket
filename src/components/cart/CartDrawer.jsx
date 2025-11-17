@@ -20,6 +20,7 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
       <DrawerContent className="max-w-sm ml-auto overflow-x-hidden h-full ">
         <DrawerHeader className="flex justify-between">
           <DrawerTitle className="text-primary">My Cart</DrawerTitle>
+          
           <DrawerDescription className="text-gray-500">
             {cartItems.length} Products
           </DrawerDescription>
