@@ -87,7 +87,7 @@ export const useCartStore = create(
       },
     }),
     {
-      name: "cart-store", // اسم التخزين في localStorage
+      name: "cart-store", 
       getStorage: () => localStorage,
     }
   )
