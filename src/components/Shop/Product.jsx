@@ -31,10 +31,13 @@ export default function Product({ name, image, available, review, price, id }) {
           <span>{review} reviews</span>
           <span className="text-[--red-custom] font-medium">${price}</span>
         </div>
-        <div className="rounded-4xl w-full flex overflow-hidden border-2 border-r-0 border-[--border-primary]">
+        <div className="rounded-3xl w-full flex overflow-hidden border-2 border-r-0 border-[--border-primary]">
           <button
             className="bg-[--border-primary] text-black font-bold px-4 py-2 border border-[--border-primary]"
-            onClick={() => setQuantity(quantity - 1)}
+            onClick={() => {
+              if (quantity <= 0) return;
+              setQuantity(quantity - 1);
+            }}
           >
             -
           </button>
@@ -77,7 +80,11 @@ export default function Product({ name, image, available, review, price, id }) {
                   +
                 </button>
               </div>
-              <AddToCartBtn id={id} quantity={Number(quantity)} />
+              <AddToCartBtn
+                id={id}
+                quantity={Number(quantity)}
+                setQuantity={setQuantity}
+              />
               <div className="flex gap-4">
                 <Button className="text-black w-1/2 hover:bg-[--hover-color]">
                   <HeartIcon />
