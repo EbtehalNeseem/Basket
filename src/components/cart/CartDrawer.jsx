@@ -18,10 +18,12 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
       <DrawerContent className="max-w-sm ml-auto overflow-x-hidden h-full ">
         <DrawerHeader className="flex justify-between">
           <DrawerTitle className="text-primary">My Cart</DrawerTitle>
-          
           <DrawerDescription className="text-gray-500">
             {cartItems.length} Products
           </DrawerDescription>
+          <DrawerClose asChild>
+              <i className="fa-solid fa-x text-red-400 text-[15px]"></i>
+            </DrawerClose>
         </DrawerHeader>
         {/* Cart items */}
         <div className="p-4 overflow-y-auto space-y-4">

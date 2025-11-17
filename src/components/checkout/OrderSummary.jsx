@@ -1,44 +1,47 @@
 import React from "react";
-import { useCartStore } from "../../store/cartstore";
+import OrderItem from "./OrderItem";
+import useCart from "../../hooks/useCart";
 
 export default function OrderSummary() {
-  const { cartItems, totalPrice } = useCartStore();
-   const count = useCartStore((item) => item.count);
+  const { cartItems , totalPrice} = useCart();
   return (
     <>
- <div className="p-4 overflow-y-auto space-y-4">
-          {cartItems.length === 0 && <p>Your cart is empty.</p>}
-
-         {cartItems.map((item) => (
-  <div
-    key={item.Id}
-    className="flex justify-between items-center border-b pb-2"
-  >
-    <div className="relative">
-    <div className="border border-[--border-primary] rounded w-16 h-16 flex items-center justify-center overflow-hidden">
-      <img
-        src={item.Image?.url}
-        alt={item.name}
-        className="object-cover w-full h-full"
-      />
-    </div>
-    {count > 0 && (
-            <span className="absolute -top-2 -right-2 bg-[#35afa0] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-              {count}
-            </span>
-          )}
-          </div>
-
-
-    <div className="flex-1 flex flex-col items-start px-2">
-      <span className="font-medium">{item.name || "No name"}</span>
-      <span className="text-sm text-gray-500">${item.price}</span>
-    </div>
-    </div>
-    
-     ))}
-</div>
-<span className="font-semibold">Total: ${totalPrice}</span>
+      <div className="p-4 overflow-y-auto space-y-4">
+        {cartItems.map((item) => (
+          <OrderItem key={item.Id} item={item} />
+        ))}
+      </div>
+     <div className="grid grid-row-3 gap-4">
+       <div className="flex justify-between">
+        <span>
+        subtotal . {cartItems.length}
+      </span>
+      <span>
+        ${totalPrice}
+      </span>
+      </div>
+      <div className="flex justify-between">
+        <span>
+        Shipping
+      </span>
+      <span>
+        FREE
+      </span>
+      </div>
+      <div className="flex justify-between mt-2">
+        <div className="flex flex-col justify-between">
+          <span className="text-[20px] font-bold" >
+        Total
+      </span>
+      <span className="text-[#666666]">
+        including $2.46 in taxes
+      </span>
+        </div>
+      <div>
+         <span className="text-[#666666] mr-2">USD</span>${totalPrice +2.46}
+      </div>
+      </div>
+     </div>
     </>
   );
 }

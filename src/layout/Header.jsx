@@ -11,7 +11,7 @@ import MEAST from "../assets/Icon.png";
 import Bakery from "../assets/bakery.png";
 import { useEffect, useState } from "react";
 import SearchBox from "../Components/Search/SearchBox";
-import { useCartStore } from "../store/cartstore"
+import useCart from "@/hooks/useCart";
 import CartIcon from "../components/home/CartIcon";
 const Container = ({ children }) => (
   <div className="mx-auto w-full max-w-[1200px] px-3 sm:px-4">{children}</div>
@@ -30,7 +30,7 @@ const NAV_LINKS = [
 ];
 
 export default function Header({ setIsCartOpen }) {
-  const count = useCartStore((state) => state.cartItems.length);
+ const { totalPrice} = useCart();
   const [open, setOpen] = useState(false);
 
   const [isloggedin, setIsLoggedIn] = useState(false);
@@ -156,7 +156,7 @@ export default function Header({ setIsCartOpen }) {
 
 
             <span className="hidden sm:inline text-sm text-gray-700">
-              $0.00
+             $ {totalPrice}
             </span>
             <button
               onClick={() => setIsCartOpen(true)}
