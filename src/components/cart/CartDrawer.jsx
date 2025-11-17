@@ -1,5 +1,3 @@
-// CartDrawer.jsx
-import React from "react";
 import {
   Drawer,
   DrawerContent,
@@ -7,80 +5,38 @@ import {
   DrawerTitle,
   DrawerFooter,
   DrawerClose,
+  DrawerDescription,
 } from "../ui/drawer";
 import { Button } from "../ui/button";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useCartStore } from "../../store/cartstore";
+import CartItem from "./CartItem";
+import useCart from "@/hooks/useCart";
 
 export default function CartDrawer({ isOpen, setIsOpen }) {
-    const { cartItems, totalPrice, removeFromCart, addToCart  } = useCartStore();
-
-     if (!cartItems) return <p>Loading...</p>;
-
+  const { cartItems, totalPrice, isLoading, error } = useCart();
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading cart.</p>;
   return (
-    <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right" >
+    <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
       <DrawerContent className="max-w-sm ml-auto overflow-x-hidden h-full ">
         <DrawerHeader className="flex justify-between">
           <DrawerTitle className="text-primary">My Cart</DrawerTitle>
-          <DrawerClose asChild>
-            <div onClick={() => setIsOpen(false)}>
-              <i className="fa-solid fa-x text-[15px] text-red-600"></i>
-            </div>
-          </DrawerClose>
+          <DrawerDescription className="text-gray-500">
+            {cartItems.length} Products
+          </DrawerDescription>
         </DrawerHeader>
-         {/* Cart items */}
+        {/* Cart items */}
         <div className="p-4 overflow-y-auto space-y-4">
           {cartItems.length === 0 && <p>Your cart is empty.</p>}
 
-         {cartItems.map((item) => (
-  <div
-    key={item.Id}
-    className="flex justify-between items-center border-b pb-2"
-  >
-    <div className="border border-[--border-primary] rounded w-16 h-16 flex items-center justify-center overflow-hidden">
-      <img
-        src={item.Image?.url}
-        alt={item.name}
-        className="object-cover w-full h-full"
-      />
-    </div>
-
-    <div className="flex-1 flex flex-col items-start px-2">
-      <span className="font-medium">{item.name || "No name"}</span>
-      <span className="text-sm text-gray-500">${item.price}</span>
-    </div>
-
-    <div className="flex items-center space-x-2">
-      <button
-        onClick={() => addToCart(item.productId, -1)}
-        className="p-1"
-      >
-        <i className="fa-solid fa-circle-minus text-primary"></i>
-      </button>
-
-      <span>{item.quantity}</span>
-
-      <button
-        onClick={() => addToCart(item.productId, 1)}
-        className="p-1"
-      >
-        <i className="fa-solid fa-circle-plus text-primary"></i>
-      </button>
-
-      <button
-        onClick={() => removeFromCart(item.productId)}
-        className="p-1"
-      >
-        <i className="fa-solid fa-trash text-red-600 hover:text-red-800"></i>
-      </button>
-    </div>
-  </div>
+          {cartItems.map((item) => (
+            <CartItem key={item.Id} item={item} />
           ))}
         </div>
 
-          <DrawerFooter className="flex flex-col space-y-2">
-          <span className="font-semibold">Total: ${totalPrice}</span>
+        <DrawerFooter className="flex flex-col space-y-2">
+          <span className="font-semibold text-2xl tracking-wide">
+            Total: ${parseFloat(totalPrice.toFixed(2))}
+          </span>
           <Button onClick={() => setIsOpen(false)}>
             <a href="/checkout" className="text-primary">
               Checkout

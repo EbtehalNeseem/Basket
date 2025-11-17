@@ -8,7 +8,6 @@ function formatPrice(v) {
 }
 
 export default function ProductCard({ item }) {
-  console.log("item", item);
   // title
   const title = item?.title || item?.Name || item?.productName || "Product";
 
