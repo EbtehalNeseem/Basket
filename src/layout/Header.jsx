@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import SearchBox from "../Components/Search/SearchBox";
 import useCart from "@/hooks/useCart";
 import CartIcon from "../components/home/CartIcon";
+import { useAuthStore } from "@/store/authStore";
 const Container = ({ children }) => (
   <div className="mx-auto w-full max-w-[1200px] px-3 sm:px-4">{children}</div>
 );
@@ -30,21 +31,13 @@ const NAV_LINKS = [
 ];
 
 export default function Header({ setIsCartOpen }) {
- const { totalPrice} = useCart();
+  const { totalPrice} = useCart();
+  const token = useAuthStore((state) => state.token);
+  const logout = useAuthStore((state) => state.logout);
   const [open, setOpen] = useState(false);
 
-  const [isloggedin, setIsLoggedIn] = useState(false);
+  const isloggedin = !!token;
 
-
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    setIsLoggedIn(!!token)
-  }, [])
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-  };
 
   return (
 
@@ -138,7 +131,7 @@ export default function Header({ setIsCartOpen }) {
             {
               isloggedin && (
                 <button
-                  onClick={handleLogout}
+                  onClick={logout}
                   className="text-white bg-red-600 border rounded-full py-1.5 px-3 text-xs md:text-sm hover:bg-red-700"
                 >
                   Logout
