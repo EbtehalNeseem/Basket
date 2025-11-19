@@ -1,24 +1,13 @@
-import { useState, useEffect } from "react";
+import { getWishlist } from "@/js/Wishlist";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useWishlist() {
-  const [wishlist, setWishlist] = useState([]);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["ProductsInWishlist"],
+    queryFn: getWishlist,
+  });
 
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("wishlist")) || [];
-    setWishlist(saved);
-  }, []);
+  const wishlistItems = data?.wishlist?.items || [];
 
-  const addToWishlist = (product) => {
-    const updated = [...wishlist, product];
-    setWishlist(updated);
-    localStorage.setItem("wishlist", JSON.stringify(updated));
-  };
-
-  const removeFromWishlist = (id) => {
-    const updated = wishlist.filter((item) => item.id !== id);
-    setWishlist(updated);
-    localStorage.setItem("wishlist", JSON.stringify(updated));
-  };
-
-  return { wishlist, addToWishlist, removeFromWishlist };
+  return { wishlistItems, isLoading, error };
 }

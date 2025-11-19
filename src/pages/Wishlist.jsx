@@ -1,28 +1,22 @@
 import useWishlist from "../hooks/UseWishlist";
+import WishlistItem from "../components/wishlist/WishlistItem";
 
-function WishlistPage() {
-  const { wishlist, removeFromWishlist } = useWishlist();
+export default function WishlistPage() {
+  const { wishlistItems, isLoading, error } = useWishlist();
 
   return (
-    <div className="px-20">
-      <h2 className="text-primary text-[40px]">My Wishlist</h2>
+    <div className="container mx-auto p-6">
+      <h1 className="text-2xl font-bold text-primary mb-4">My Wishlist</h1>
 
-      {wishlist.length === 0 && <p className="py-5 ">No products yet.</p>}
+      {isLoading && <p>Loading wishlist...</p>}
+      {error && <p>Failed to load wishlist</p>}
+      {wishlistItems.length === 0 && <p>Your wishlist is empty.</p>}
 
-      <div className="wishlist-grid">
-        {wishlist.map((item) => (
-          <div key={item.id} className="card">
-            <img src={item.image} />
-            <h3>{item.title}</h3>
-
-            <button onClick={() => removeFromWishlist(item.id)}>
-              Remove
-            </button>
-          </div>
+      <div className="space-y-4">
+        {wishlistItems.map((item) => (
+          <WishlistItem key={item.id} item={item} />
         ))}
       </div>
     </div>
   );
 }
-
-export default WishlistPage;

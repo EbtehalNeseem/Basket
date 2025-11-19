@@ -22,8 +22,14 @@
     "@radix-ui/react-scroll-area": "^1.2.10",
     "@radix-ui/react-slot": "^1.2.4",
     "@shadcn/ui": "^0.0.4",
+<<<<<<< HEAD
     "@tanstack/react-query": "^5.90.10",
     "@tanstack/react-query-devtools": "^5.90.2",
+=======
+    "@tanstack/react-query": "^5.90.9",
+ 
+
+>>>>>>> 0e979b1177081f071bc8d4083b15118ed266f82b
     "axios": "^1.13.2",
     "caniuse-lite": "^1.0.30001754",
     "class-variance-authority": "^0.7.1",

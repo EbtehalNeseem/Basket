@@ -1,26 +1,52 @@
-import React from "react";
-import CartItem from "../cart/CartItem";
-import useCart from "@/hooks/useCart";
+import OrderItem from "./OrderItem";
+import useCart from "../../hooks/useCart";
 
 export default function OrderSummary() {
-  const { cartItems, totalPrice, isLoading, error } = useCart();
+  const { cartItems , totalPrice , isLoading} = useCart();
   if (isLoading)
     return (
       <h6 className="text-slate-500 text-center text-2xl h-full">
         Loading cart items...
       </h6>
     );
-
   return (
-    <div>
-      {error && <p>Failed to load cart items.</p>}
-
-      {cartItems.map((item) => (
-        <CartItem key={item.id} item={item} />
-      ))}
-      <span className="font-semibold text-2xl tracking-wide mt-4 inline-block">
-        Total: ${parseFloat(totalPrice.toFixed(2)) || 0}
+    <>
+      <div className="p-4 overflow-y-auto space-y-4">
+        {cartItems.map((item) => (
+          <OrderItem key={item.Id} item={item} />
+        ))}
+      </div>
+     <div className="grid grid-row-3 gap-4">
+       <div className="flex justify-between">
+        <span>
+        subtotal . {cartItems.length}
       </span>
-    </div>
+      <span>
+        ${totalPrice}
+      </span>
+      </div>
+      <div className="flex justify-between">
+        <span>
+        Shipping
+      </span>
+      <span>
+        FREE
+      </span>
+      </div>
+      <div className="flex justify-between mt-2">
+        <div className="flex flex-col justify-between">
+          <span className="text-[20px] font-bold" >
+        Total
+      </span>
+      <span className="text-[#666666]">
+        including $2.46 in taxes
+      </span>
+        </div>
+      <div>
+         <span className="text-[#666666] mr-2">USD</span>${totalPrice +2.46}
+      </div>
+      </div>
+     </div>
+    </>
   );
 }
