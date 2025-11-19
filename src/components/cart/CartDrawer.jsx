@@ -20,9 +20,7 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
           <DrawerDescription className="text-gray-500">
             {cartItems.length} Products
           </DrawerDescription>
-          <DrawerClose asChild>
-              <i className="fa-solid fa-x text-red-400 text-[15px]"></i>
-            </DrawerClose>
+         
         </DrawerHeader>
         {/* Cart items */}
         <div className="p-4 overflow-y-auto space-y-4">

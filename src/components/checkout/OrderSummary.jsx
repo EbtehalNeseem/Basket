@@ -13,7 +13,7 @@ export default function OrderSummary() {
     <>
       <div className="p-4 overflow-y-auto space-y-4">
         {cartItems.map((item) => (
-          <OrderItem key={item.Id} item={item} />
+          <OrderItem key={item.id} item={item} />
         ))}
       </div>
      <div className="grid grid-row-3 gap-4">
