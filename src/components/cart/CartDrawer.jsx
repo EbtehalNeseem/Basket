@@ -4,7 +4,6 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerFooter,
-  DrawerClose,
   DrawerDescription,
 } from "../ui/drawer";
 import { Button } from "../ui/button";
@@ -24,11 +23,13 @@ export default function CartDrawer({ isOpen, setIsOpen }) {
         </DrawerHeader>
         {/* Cart items */}
         <div className="p-4 overflow-y-auto space-y-4">
-          {cartItems.length === 0 && <p>Your cart is empty.</p>}
+          {cartItems.length === 0 && (
+            <p className="text-slate-500 text-center">Your cart is empty.</p>
+          )}
           {error && <p>Failed to load cart items.</p>}
           {isLoading && <p>Loading cart items...</p>}
           {cartItems.map((item) => (
-            <CartItem key={item.Id} item={item} />
+            <CartItem key={item.id} item={item} />
           ))}
         </div>
 

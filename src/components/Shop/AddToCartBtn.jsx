@@ -1,11 +1,16 @@
-import { ShoppingBag } from "lucide-react";
+import { Loader2Icon, LucideLoader, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import useAddItemToCart from "@/hooks/useAddItemToCart";
 
 function AddToCartBtn({ id, quantity = 1, setQuantity }) {
   const { mutate, isPending } = useAddItemToCart();
   const handleAdditionToCart = () => {
-    mutate(id, quantity);
+    mutate(
+      { productId: id, quantity: quantity },
+      {
+        onSuccess: () => setQuantity(1),
+      }
+    );
     setQuantity(1);
   };
   return (
@@ -14,8 +19,17 @@ function AddToCartBtn({ id, quantity = 1, setQuantity }) {
       onClick={handleAdditionToCart}
       disabled={isPending}
     >
-      <ShoppingBag />
-      Add to Cart
+      {isPending ? (
+        <>
+          Adding
+          <LucideLoader />
+        </>
+      ) : (
+        <>
+          <ShoppingBag />
+          Add to Cart
+        </>
+      )}
     </Button>
   );
 }

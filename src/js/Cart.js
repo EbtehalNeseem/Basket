@@ -10,7 +10,7 @@ export async function getCart() {
   });
   return data;
 }
-export async function addToCart(userId, productId, quantity) {
+export async function addToCart({ userId, productId, quantity }) {
   const accessToken = useUserToken.getState().accessToken;
 
   const { data } = await api.post(
@@ -51,6 +51,7 @@ export async function increaseItemQuantity(productId) {
   const accessToken = useUserToken.getState().accessToken;
   const { data } = await api.patch(
     `/cart/update-quantity/${productId}?action=increase`,
+    {},
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -63,6 +64,7 @@ export async function decreaseItemQuantity(productId) {
   const accessToken = useUserToken.getState().accessToken;
   const { data } = await api.patch(
     `/cart/update-quantity/${productId}?action=decrease`,
+    {},
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
