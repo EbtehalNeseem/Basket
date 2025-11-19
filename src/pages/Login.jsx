@@ -1,0 +1,151 @@
+import React, { useEffect, useState } from 'react'
+import image from '../assets/loginImg.png'
+import { useFormik } from 'formik'
+import * as Yup from 'yup';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { useUserToken } from '../Store/userStore';
+import api from '../js/axiosInstance';
+
+
+export default function Register() {
+  const setTokens = useUserToken((state) => state.setTokens);
+  const setCredentials = useUserToken((state) => state.setCredentials);
+  const setUserId = useUserToken((state) => state.setUserId);
+  const userId = useUserToken((state) => state.userId);
+  const [isLoading, setisLoading] = useState(false);
+  const [error, setError] = useState('')
+  let navigate = useNavigate();
+
+
+
+  function handelRegister(formValues) {
+    setisLoading(true)
+    api.post(`/auth/login`, formValues)
+      .then((response) => {
+        setisLoading(false)
+        navigate('/')
+        setUserId(response?.data?.user?.id)
+        setTokens(response?.data?.AccessToken, response?.data?.refreshToken);
+        setCredentials(JSON.parse(response?.config?.data).Phone, JSON.parse(response?.config?.data).Password);
+      })
+      .catch((response) => {
+        setisLoading(false);
+        setError(response?.response?.data?.message)
+
+      })
+
+  }
+
+  let validationSchema = Yup.object().shape({
+
+    Phone: Yup.string().matches(/^01[0125][0-9]{8}$/, 'Phone number is Invaild').required('Phone number is required'),
+    Password: Yup.string().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/, 'Password is Invalid').required('Password is required'),
+
+  })
+
+
+  let formik = useFormik({
+    initialValues: {
+
+      Phone: '',
+      Password: '',
+
+    },
+    validationSchema,
+    onSubmit: handelRegister
+  })
+
+
+  return <>
+    <section className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-3xl bg-white shadow-lg rounded-2xl flex flex-col md:flex-row overflow-hidden">
+        {/* Left side: Form */}
+        <div className="w-full md:w-1/2 pr-8 pl-8 pb-8 md:p-10">
+          <h2 className="text-3xl font-semibold text-[#35AFA0] mb-6 text-center md:text-left">
+            Sign In
+          </h2>
+
+          {error ? <div class="flex items-center p-2 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              {error}
+            </div>
+          </div> : ''}
+
+
+          <form className="space-y-4" onSubmit={formik.handleSubmit}>
+
+
+            <input name='Phone' value={formik.values.Phone} onChange={formik.handleChange} onBlur={formik.handleBlur}
+              type="tel"
+              placeholder="Phone"
+              className="w-full px-4 py-3 border border-gray-300 rounded-full bg-gray-50 text-gray-900 text-sm focus:ring-2 focus:ring-[#2C988B] focus:border-[#2C988B] outline-none transition"
+            />
+
+            {formik.errors.Phone && formik.touched.Phone ? <div class="flex items-center p-2 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+              </svg>
+              <span class="sr-only">Info</span>
+              <div>
+                {formik.errors.Phone}
+              </div>
+            </div> : null}
+
+
+
+            <input name='Password' value={formik.values.Password} onChange={formik.handleChange} onBlur={formik.handleBlur}
+              type="password"
+              placeholder="Password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-full bg-gray-50 text-gray-900 text-sm focus:ring-2 focus:ring-[#2C988B] focus:border-[#2C988B] outline-none transition"
+            />
+
+
+            {formik.errors.Password && formik.touched.Password ? <div class="flex items-center p-2 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+              </svg>
+              <span class="sr-only">Info</span>
+              <div>
+                {formik.errors.Password}
+              </div>
+            </div> : null}
+
+
+
+            <button
+              type="submit"
+              className="w-full bg-[#35AFA0] hover:bg-[#2C988B] text-white font-semibold py-3 rounded-full text-sm transition"
+            >
+              {isLoading ? <i class="fas fa-spinner fa-spin"></i> : 'Log In'}
+            </button>
+
+            <p className="text-center text-gray-600 text-sm mt-4">
+              Create new account ?{" "}
+              <Link
+                to={'/register'}
+                className="text-[#35AFA0] hover:text-[#2C988B] font-medium transition"
+              >
+                Sign Up
+              </Link>
+            </p>
+          </form>
+        </div>
+
+        {/* Right side: Illustration */}
+        <div className="hidden md:flex w-1/2 bg-white items-center justify-center p-6">
+          <img
+            src={image}
+            alt="shopping illustration"
+            className="w-72 h-auto"
+          />
+        </div>
+      </div>
+    </section>
+
+  </>
+}
